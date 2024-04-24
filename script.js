@@ -1,41 +1,34 @@
-// JavaScript code for any interactive features on the website
+// script.js
+document.addEventListener("DOMContentLoaded", function() {
+    // Sample product data (you can replace this with real data fetched from a server)
+    const products = [
+        { name: "Gaming Mouse", price: "$49.99" },
+        { name: "Mechanical Keyboard", price: "$99.99" },
+        { name: "Gaming Headset", price: "$79.99" },
+        { name: "Gaming Chair", price: "$199.99" }
+    ];
 
-// Example: Adding a smooth scroll effect to navigation links
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
+    // Function to display products
+    function displayProducts() {
+        const productList = document.getElementById("products");
 
-        const targetId = this.getAttribute('href');
-        const target = document.querySelector(targetId);
+        products.forEach(product => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("product-card");
 
-        window.scrollTo({
-            top: target.offsetTop,
-            behavior: 'smooth'
+            const productName = document.createElement("h2");
+            productName.textContent = product.name;
+
+            const productPrice = document.createElement("p");
+            productPrice.textContent = "Price: " + product.price;
+
+            productCard.appendChild(productName);
+            productCard.appendChild(productPrice);
+
+            productList.appendChild(productCard);
         });
-    });
-});
-
-// Example: Form validation
-const form = document.querySelector('form');
-
-form.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const name = form.querySelector('input[name="name"]').value;
-    const email = form.querySelector('input[name="email"]').value;
-    const message = form.querySelector('textarea[name="message"]').value;
-
-    if (!name || !email || !message) {
-        alert('Please fill in all fields.');
-        return;
     }
 
-    // Here you can send the form data to a server using AJAX or any other method
-    // For demonstration purposes, let's just log the data to the console
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Message:', message);
-
-    // Reset the form after submission
-    form.reset();
+    // Call the function to display products when the DOM is loaded
+    displayProducts();
 });
